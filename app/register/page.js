@@ -2,31 +2,36 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";  // Cambiado de "next/router" a "next/navigation"
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
+  const [last_name, setLast_name] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();  // Utiliza el hook de next/navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push("/inicio");
-    // Enviar las credenciales al backend
-    const res = await fetch("", {
+    const res = await fetch("http://localhost:3001/api/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({
+        "first_name" : name,
+        "last_name" : last_name,
+        "username" : user,
+        "password" : password
+      })
     });
-
     const data = await res.json();
-    router.push("/inicio");
+    if(res.status == 201) {
+        router.push("/inicio");
+    }
     if (data.success) {
-      // Guardar el token en localStorage o cookies
+      console.log("a")
       localStorage.setItem("token", data.token);
-
       // Redirigir al usuario después de iniciar sesión
       router.push("/inicio");  // Cambiado el uso de router
     } else {
@@ -42,11 +47,29 @@ export default function Home() {
             <label>
               <input
                 required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              <span>Phone number, username, or email</span>
+              <span>Name</span>
+            </label>
+            <label>
+              <input
+                required
+                type="text"
+                value={last_name}
+                onChange={(e) => setLast_name(e.target.value)}
+              />
+              <span>Last Name</span>
+            </label>
+            <label>
+              <input
+                required
+                type="email"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              />
+              <span>Email</span>
             </label>
             <label>
               <input
@@ -66,7 +89,7 @@ export default function Home() {
           <span></span>
         </div>
         <div className={styles.content__forgot_buttons}>
-          <button onClick={()=>{router.push("/register");}}>Registrarse</button>
+          <button>Registrarse</button>
         </div>
       </div>
     </div>
