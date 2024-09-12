@@ -1,12 +1,20 @@
-"use client";
-import { useState,useEffect } from "react";
-import { useRouter } from "next/navigation";  // Cambiado de "next/router" a "next/navigation"
+"use client"
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from "../page.module.css";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
-  const [eventos,setEventos] = useState([])
+  const [eventos, setEventos] = useState([]);
   const router = useRouter();
+
+  const redirectoEvent = (event) => {
+    // Convertir el objeto en una cadena JSON
+    const eventString = JSON.stringify(event);
+
+    // Redirigir a la nueva ruta con el parámetro de consulta
+    router.push(`/detalleEvento?id=${event.id}`);
+  };
 
   useEffect(() => {
     // Verificar si el token está en localStorage
@@ -37,7 +45,11 @@ export default function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <p>Bienvenido al panel de control</p>
-      {eventos.map((event)=>(<div>{event.name}{event.description}</div>))}
+      {eventos.map((event) => (
+        <button key={event.id} onClick={() => redirectoEvent(event)}>
+          {event.name} - {event.description}
+        </button>
+      ))}
     </div>
   );
 }
