@@ -1,6 +1,8 @@
 import localFont from "next/font/local";
+import Image from 'next/image';
+import eventoimg from './images/eventos.png';
+import perfil from './images/perfil.png';
 import "./globals.css";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -21,6 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <nav className="navbar">
+          <Image src={eventoimg} alt="Logo" width={50} height={50}/>
+          <Image src={perfil} alt="perfil" width={50} height={50}/>
+        </nav>
         {children}
       </body>
     </html>

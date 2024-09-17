@@ -42,7 +42,9 @@ export default function Dashboard() {
   if (loading) return <p>Cargando...</p>;
 
   return (
-    <div>
+
+    <>
+        <div>
       <h1>Dashboard</h1>
       <p>Bienvenido al panel de control</p>
       {eventos.map((event) => (
@@ -51,5 +53,10 @@ export default function Dashboard() {
         </button>
       ))}
     </div>
+    <nav className="footbar">
+          <a onClick={()=>{router.push("/inicio");}}>Home</a>
+          <a onClick={()=>{router.push("/contacto");}}>Contacto</a>
+        </nav>
+    </>
   );
 }

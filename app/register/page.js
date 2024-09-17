@@ -89,7 +89,7 @@ export default function Home() {
           <span></span>
         </div>
         <div className={styles.content__forgot_buttons}>
-          <button>Registrarse</button>
+          <button onClick={()=>{router.push("/");}}>Logearse</button>
         </div>
       </div>
     </div>
