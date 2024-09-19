@@ -3,38 +3,39 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";  // Cambiado de "next/router" a "next/navigation"
 import styles from "./page.module.css";
-
+import { useUser } from './userContext';
+import NavBar from "./navbar";
 export default function Home() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();  // Utiliza el hook de next/navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push("/inicio");
     // Enviar las credenciales al backend
-    const res = await fetch("", {
+    const res = await fetch("http://localhost:3000/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
 
     const data = await res.json();
-    router.push("/inicio");
-    if (data.success) {
-      // Guardar el token en localStorage o cookies
+    if (typeof(data) == "object") {
+      console.log(data)
       localStorage.setItem("token", data.token);
-
+      router.push("/inicio")
       // Redirigir al usuario después de iniciar sesión
-      router.push("/inicio");  // Cambiado el uso de router
+    // Cambiado el uso de router
     } else {
       alert("Credenciales incorrectas");
     }
   };
 
   return (
+    <>
+    <NavBar></NavBar>
     <div className={styles.container}>
       <div className={styles.content}>
         <form className={styles.content__form} onSubmit={handleSubmit}>
@@ -42,9 +43,9 @@ export default function Home() {
             <label>
               <input
                 required
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type=""
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <span>Phone number, username, or email</span>
             </label>
@@ -70,5 +71,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }

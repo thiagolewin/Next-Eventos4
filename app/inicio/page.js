@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "../page.module.css";
-
+import NavBar from "../navbar";
+import { useUser } from '../userContext.js';
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [eventos, setEventos] = useState([]);
@@ -18,10 +19,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Verificar si el token está en localStorage
+    const { user } = useUser();
+    if (!user) {
+        return <p>No estás logueado.</p>;
+    }
     const prepareApp = async () => {
       try {
         // Realiza el fetch de los eventos
-        const response = await fetch('http://localhost:3001/api/event');
+        const response = await fetch('http://localhost:3000/api/event');
         const data = await response.json();
         setEventos(data); // Guarda los datos en el estado
         setLoading(false); // Marca la aplicación como lista
@@ -43,8 +48,9 @@ export default function Dashboard() {
 
   return (
 
-    <>
-        <div>
+    <UserProvider>
+    <NavBar></NavBar>
+      <div className={styles.inicio}>
       <h1>Dashboard</h1>
       <p>Bienvenido al panel de control</p>
       {eventos.map((event) => (
@@ -57,6 +63,6 @@ export default function Dashboard() {
           <a onClick={()=>{router.push("/inicio");}}>Home</a>
           <a onClick={()=>{router.push("/contacto");}}>Contacto</a>
         </nav>
-    </>
+    </UserProvider>
   );
 }
