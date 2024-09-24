@@ -1,14 +1,16 @@
 // Importar useRouter desde next/navigation
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";  // Cambiado de "next/router" a "next/navigation"
 import styles from "./page.module.css";
-import { useUser } from './userContext';
 import NavBar from "./navbar";
+import { UserContext } from "./userContext";
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();  // Utiliza el hook de next/navigation
+  const router = useRouter();  // Utiliza el hook de next/navigation  
+
+  const {saveUserToken} = useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +24,10 @@ export default function Home() {
     });
 
     const data = await res.json();
+    console.log(data)
     if (typeof(data) == "object") {
       console.log(data)
-      localStorage.setItem("token", data.token);
+      saveUserToken(data);
       router.push("/inicio")
       // Redirigir al usuario después de iniciar sesión
     // Cambiado el uso de router

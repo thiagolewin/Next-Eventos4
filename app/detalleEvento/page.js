@@ -41,7 +41,7 @@ export default function Detalle() {
       <h2>{evento.description}</h2>
       <h3>Duración: {evento.duration_in_minutes} minutos</h3>
       <h4>Precio: ${evento.price}</h4>
-      <button onClick={() => router.push('/')}>Regresar</button>
+      <button onClick={() => router.push('/inicio')}>Regresar</button>
     </div>
   );
 }

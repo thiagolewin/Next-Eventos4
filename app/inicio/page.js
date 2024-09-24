@@ -1,14 +1,15 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from "../page.module.css";
 import NavBar from "../navbar";
-import { useUser } from '../userContext.js';
+import { UserContext } from '../userContext.js';
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [eventos, setEventos] = useState([]);
   const router = useRouter();
-
+  const { user } = useContext(UserContext);
+  
   const redirectoEvent = (event) => {
     // Convertir el objeto en una cadena JSON
     const eventString = JSON.stringify(event);
@@ -17,12 +18,10 @@ export default function Dashboard() {
     router.push(`/detalleEvento?id=${event.id}`);
   };
 
-  useEffect(() => {
-    // Verificar si el token está en localStorage
-    const { user } = useUser();
-    if (!user) {
-        return <p>No estás logueado.</p>;
-    }
+  console.log(user)
+
+  useEffect(() => {    
+    
     const prepareApp = async () => {
       try {
         // Realiza el fetch de los eventos
@@ -34,21 +33,26 @@ export default function Dashboard() {
         console.warn(e);
       }
     };
-
-    prepareApp();
-    /*if (!token) {
+    if(user) {
+      prepareApp();
+    }
+    if (!user) {
       // Redirigir al login si no hay token
       router.push("/");
     } else {
       setLoading(false); // Dejar que el contenido se cargue
-    }*/
+    }
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
+  // Verificar si el token está en localStorage    
+  if (!user) {
+    return <p>No estás logueado.</p>;    
+}
+
+  //if (loading) return <p>Cargando...</p>;
 
   return (
-
-    <UserProvider>
+    <>
     <NavBar></NavBar>
       <div className={styles.inicio}>
       <h1>Dashboard</h1>
@@ -62,7 +66,7 @@ export default function Dashboard() {
     <nav className="footbar">
           <a onClick={()=>{router.push("/inicio");}}>Home</a>
           <a onClick={()=>{router.push("/contacto");}}>Contacto</a>
-        </nav>
-    </UserProvider>
+        </nav>    
+        </>
   );
 }
