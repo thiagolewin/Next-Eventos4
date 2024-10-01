@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from './page.css'; // Asegúrate de importar el CSS
+import styles from './page.module.css'; // Asegúrate de importar el CSS
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 export default function Detalle() {
@@ -17,7 +17,7 @@ export default function Detalle() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.perfil}>
       <h2>Nombre: {user.first_name}</h2>
       <h2>Apellido: {user.last_name}</h2>
       <h3>Username: {user.username}</h3>

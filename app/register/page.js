@@ -13,7 +13,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3001/api/user/register", {
+    const res = await fetch("http://localhost:3000/api/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,11 +25,9 @@ export default function Home() {
         "password" : password
       })
     });
-    const data = await res.json();
-    if(res.status == 201) {
-        router.push("/inicio");
-    }
-    if (data.success) {
+    const data = await res.json();  
+    console.log(data)
+    if (res.status != 400) {
       console.log("a")
       localStorage.setItem("token", data.token);
       // Redirigir al usuario después de iniciar sesión

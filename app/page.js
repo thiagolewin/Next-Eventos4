@@ -38,7 +38,6 @@ export default function Home() {
 
   return (
     <>
-    <NavBar></NavBar>
     <div className={styles.container}>
       <div className={styles.content}>
         <form className={styles.content__form} onSubmit={handleSubmit}>

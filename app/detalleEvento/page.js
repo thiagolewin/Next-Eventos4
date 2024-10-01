@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from './page.css'; // Asegúrate de importar el CSS
+import styles from './page.module.css'; // Updated to CSS Modules
+
 
 export default function Detalle() {
   const router = useRouter();
@@ -36,12 +37,12 @@ export default function Detalle() {
   }
 
   return (
-    <div className={styles.container}>
-      <h1>{evento.name}</h1>
-      <h2>{evento.description}</h2>
-      <h3>Duración: {evento.duration_in_minutes} minutos</h3>
-      <h4>Precio: ${evento.price}</h4>
-      <button onClick={() => router.push('/inicio')}>Regresar</button>
+    <div className={styles.detalle}>
+      <h1 className={styles.detalleh1}>{evento.name}</h1>
+      <h2 className={styles.detalleh2}>{evento.description}</h2>
+      <h3 className={styles.detalleh3}>Duración: {evento.duration_in_minutes} minutos</h3>
+      <h4 className={styles.detalleh4}>Precio: ${evento.price}</h4>
+      <button className={styles.detalleBoton} onClick={() => router.push('/inicio')}>Regresar</button>
     </div>
   );
 }
