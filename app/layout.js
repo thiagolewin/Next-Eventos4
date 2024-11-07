@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import { UserProvider } from './userContext.js';
+import { ProtectedRoutes } from "./protectedRoutes.js";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -20,10 +21,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-    <UserProvider>
-    {children}
-    </UserProvider>
-
+        {/* Wrap the whole app with UserProvider */}
+        <UserProvider>
+          <ProtectedRoutes>
+          {/* Conditionally protect routes if needed */}
+            {children}
+            </ProtectedRoutes>
+        </UserProvider>
       </body>
     </html>
   );

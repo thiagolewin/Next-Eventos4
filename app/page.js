@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";  // Cambiado de "next/router" a "ne
 import styles from "./page.module.css";
 import NavBar from "./navbar";
 import { UserContext } from "./userContext";
+import { ProtectedRoutes } from "./protectedRoutes";
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,7 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Enviar las credenciales al backend
-    const res = await fetch("http://localhost:3000/api/user/login", {
+    const res = await fetch("http://localhost:3001/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +38,7 @@ export default function Home() {
   };
 
   return (
+    <ProtectedRoutes>
     <>
     <div className={styles.container}>
       <div className={styles.content}>
@@ -74,6 +76,6 @@ export default function Home() {
       </div>
     </div>
     </>
-    
+    </ProtectedRoutes>
   );
 }

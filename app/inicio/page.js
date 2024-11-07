@@ -25,7 +25,7 @@ export default function Dashboard() {
     const prepareApp = async () => {
       try {
         // Realiza el fetch de los eventos
-        const response = await fetch('http://localhost:3000/api/event');
+        const response = await fetch('http://localhost:3001/api/event');
         const data = await response.json();
         setEventos(data); // Guarda los datos en el estado
         setLoading(false); // Marca la aplicación como lista
