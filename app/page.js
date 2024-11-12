@@ -16,7 +16,7 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Enviar las credenciales al backend
-    const res = await fetch("http://localhost:3001/api/user/login", {
+    const res = await fetch("http://localhost:3000/api/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

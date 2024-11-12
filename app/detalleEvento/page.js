@@ -15,7 +15,7 @@ export default function Detalle() {
     if (idFromQuery) {
       const fetchEvento = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/api/event/${idFromQuery}`);
+          const response = await fetch(`http://localhost:3000/api/event/${idFromQuery}`);
           const data = await response.json();
           setEvento(data[0]); // Asumiendo que solo se necesita el primer evento
           setLoading(false);
