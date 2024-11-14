@@ -8,6 +8,7 @@ import { UserContext } from "../userContext";
 export default function Detalle() {
   const router = useRouter();
   const { user,cerrar } = useContext(UserContext);
+  console.log(user)
     const cerrarSesion = ()=> {
         cerrar()
         router.push('/')
@@ -15,6 +16,7 @@ export default function Detalle() {
   if (!user) {
     return <div className={styles.container}><h1>No ha user...</h1></div>;
   }
+  console.log(user)
 
   return (
     <div className={styles.perfil}>

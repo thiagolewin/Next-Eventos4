@@ -12,7 +12,7 @@ export const ProtectedRoutes = ({ children }) => {
     console.log(user == "null" && pathname == "/inicio")
     useEffect(() => {
         // Redirect if the user is not logged in and is not on the homepage
-        if (user == "null" && pathname == "/inicio") {
+        if (user == "null" && !(pathname === "/" || pathname === "/register")) {
             router.push("/");
         }
 

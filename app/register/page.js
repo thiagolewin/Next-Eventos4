@@ -79,7 +79,7 @@ export default function Home() {
               <span>Password</span>
             </label>
           </div>
-          <button type="submit">Log In</button>
+          <button type="submit">Registrarse</button>
         </form>
         <div className={styles.content__or_text}>
           <span></span>
