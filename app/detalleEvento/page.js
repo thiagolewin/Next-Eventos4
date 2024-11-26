@@ -37,12 +37,15 @@ export default function Detalle() {
   }
 
   return (
-    <div className={styles.detalle}>
+    <section className={styles.section}>
+      <div className={styles.detalle}>
       <h1 className={styles.detalleh1}>{evento.name}</h1>
       <h2 className={styles.detalleh2}>{evento.description}</h2>
       <h3 className={styles.detalleh3}>Duración: {evento.duration_in_minutes} minutos</h3>
       <h4 className={styles.detalleh4}>Precio: ${evento.price}</h4>
       <button className={styles.detalleBoton} onClick={() => router.push('/inicio')}>Regresar</button>
     </div>
+    </section>
+    
   );
 }

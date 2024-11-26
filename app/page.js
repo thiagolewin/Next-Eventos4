@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter();  // Utiliza el hook de next/navigation  
 
   const {saveUserToken} = useContext(UserContext)
-
+  console.log(UserContext)
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Enviar las credenciales al backend

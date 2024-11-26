@@ -18,8 +18,6 @@ export default function Dashboard() {
     router.push(`/detalleEvento?id=${event.id}`);
   };
 
-  console.log(user)
-
   useEffect(() => {    
     
     const prepareApp = async () => {

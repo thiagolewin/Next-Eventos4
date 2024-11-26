@@ -38,6 +38,7 @@ export default function Home() {
   };
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.content}>
         <form className={styles.content__form} onSubmit={handleSubmit}>

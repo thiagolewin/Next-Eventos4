@@ -1,9 +1,17 @@
 /* CSS mejorado */
 
-  
+  .section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }  
   .detalle {
     max-width: 600px;
     margin: 0 auto;
+    align-items: center;
+    justify-content: center;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -20,14 +28,14 @@
   
   .detalleh1 {
     font-size: 24px;
-    margin: 10px 0;
-    color: #007bff;
+    font-weight: 700;
+    color: black;
   }
   
   .detalleh2 {
     font-size: 20px;
-    margin: 10px 0;
-    color: #555;
+    font-weight: 600;
+    color: black;
   }
   
   .detalleh3, .detalleh4 {
@@ -37,7 +45,7 @@
   }
   
   .detalleBoton {
-    background: #007bff;
+    background: black;
     color: white;
     border: none;
     border-radius: 8px;

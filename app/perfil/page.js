@@ -19,12 +19,15 @@ export default function Detalle() {
   console.log(user)
 
   return (
-    <div className={styles.perfil}>
+    <section className={styles.section}>
+<div className={styles.perfil}>
       <h2>Nombre: {user.first_name}</h2>
       <h2>Apellido: {user.last_name}</h2>
       <h3>Username: {user.username}</h3>
       <button onClick={() => router.push('/inicio')}>Regresar</button>
       <button onClick={() => cerrarSesion()}>Cerrar Sesion</button>
     </div>
+    </section>
+    
   );
 }
